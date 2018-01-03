@@ -2,6 +2,7 @@ package com.emrealtunbilek.candostlarapp
 
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adap
     }
 
 
-    class DostViewHolder(tek_uye: View) : RecyclerView.ViewHolder(tek_uye) {
+    inner class DostViewHolder(tek_uye: View) : RecyclerView.ViewHolder(tek_uye) {
 
         var tekDostBilgisi=tek_uye as CardView
 
@@ -63,6 +64,20 @@ class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adap
 
 
     }
+
+    fun setFilter(aranilanlar:ArrayList<Dost>){
+
+
+        dostlar=ArrayList<Dost>()
+
+        dostlar.addAll(aranilanlar)
+
+        notifyDataSetChanged()
+
+
+
+    }
+
 
 
 }
