@@ -6,17 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.Toast
 import kotlinx.android.synthetic.main.tek_uye.view.*
 
 /**
  * Created by Emre on 3.01.2018.
  */
-class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adapter<DostlarRecyclerViewAdapter.DostViewHolder>() {
+class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adapter<DostlarRecyclerViewAdapter.DostViewHolder>(), Filterable {
+
 
 
     var dostlar=tumDostlar
-
+    var myFilter:FilterHelper=FilterHelper(tumDostlar, this)
 
     override fun onBindViewHolder(holder: DostViewHolder?, position: Int) {
 
@@ -65,7 +68,20 @@ class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adap
 
     }
 
-    fun setFilter(aranilanlar:ArrayList<Dost>){
+    fun setFilter(arrayList: ArrayList<Dost>) {
+
+
+        dostlar = arrayList // arraylist nesnesi filtrelenmiş sonucları içerir
+
+    }
+
+
+    override fun getFilter(): Filter {
+        return myFilter //adapter sınıfı içinde olustuurlan filter tipindeki nesneyi döndürür
+    }
+
+
+    /*fun setFilter(aranilanlar:ArrayList<Dost>){
 
 
         dostlar=ArrayList<Dost>()
@@ -76,7 +92,7 @@ class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adap
 
 
 
-    }
+    }*/
 
 
 

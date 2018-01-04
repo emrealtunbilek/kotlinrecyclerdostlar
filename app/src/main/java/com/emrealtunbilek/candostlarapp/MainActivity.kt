@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.Menu
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), android.widget.SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(){//, android.widget.SearchView.OnQueryTextListener {
 
 
 
@@ -28,9 +28,28 @@ class MainActivity : AppCompatActivity(), android.widget.SearchView.OnQueryTextL
         var myLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerviewDostlar.layoutManager = myLayoutManager
 
+        searchViewDost.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                myAdapter.filter.filter(newText)
+
+                return false
+
+            }
+
+
+        })
+
 
     }
 
+    /*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.filtre_menu, menu)
@@ -41,8 +60,9 @@ class MainActivity : AppCompatActivity(), android.widget.SearchView.OnQueryTextL
         searchView.setOnQueryTextListener(this)
 
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 
+    /*
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
@@ -69,6 +89,7 @@ class MainActivity : AppCompatActivity(), android.widget.SearchView.OnQueryTextL
         return true
 
     }
+    */
 
     private fun veriKaynaginiDoldur() {
 
