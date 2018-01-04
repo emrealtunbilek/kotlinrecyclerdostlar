@@ -1,5 +1,6 @@
 package com.emrealtunbilek.candostlarapp
 
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -19,7 +20,7 @@ class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adap
 
 
     var dostlar=tumDostlar
-    var myFilter:FilterHelper=FilterHelper(tumDostlar, this)
+    var myFilter:FilterHelper= FilterHelper(tumDostlar, this)
 
     override fun onBindViewHolder(holder: DostViewHolder?, position: Int) {
 
@@ -56,11 +57,17 @@ class DostlarRecyclerViewAdapter(tumDostlar:ArrayList<Dost>) : RecyclerView.Adap
             dostAd.text=oanOlusturulanDost.isim
             dostResim.setImageResource(oanOlusturulanDost.resim)
 
-            tekDostBilgisi.setOnClickListener {
+            tekDostBilgisi.setOnClickListener { v ->
 
                 Toast.makeText(tekDostBilgisi.context, "Tıklanılan Öğe : " + position + " Adı:"+oanOlusturulanDost.isim, Toast.LENGTH_SHORT).show()
+                var intent=Intent(v.context, DetayActivity::class.java)
+                intent.putExtra("ad", oanOlusturulanDost.isim)
+                intent.putExtra("resim", oanOlusturulanDost.resim)
+                v.context.startActivity(intent)
 
             }
+
+
 
 
         }
